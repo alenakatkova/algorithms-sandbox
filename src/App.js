@@ -2,24 +2,18 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-let result = [];
-
 const merge = (arr) => {
+  let result = [];
   let pointer0 = 0;
-  let pointer1 = 0;
+  let pointer1 = arr.length / 2;
 
-  for (let i = 0; i < arr[0].length + arr[1].length; i++) {
-    if (pointer0 === arr[0].length) {
-      result[i] = arr[1][pointer1];
-      pointer1++;
-    } else if (pointer1 === arr[1].length) {
-      result[i] = arr[0][pointer0];
-      pointer0++;
-    } else if (arr[0][pointer0] < arr[1][pointer1]) {
-      result[i] = arr[0][pointer0];
+  for (let i = 0; i < arr.length; i++) {
+    if (pointer1 === arr.length ||
+        ((pointer0 < arr.length / 2) && (arr[pointer0] < arr[pointer1]))) {
+      result[i] = arr[pointer0];
       pointer0++;
     } else {
-      result[i] = arr[1][pointer1];
+      result[i] = arr[pointer1];
       pointer1++;
     }
   }
@@ -28,7 +22,6 @@ const merge = (arr) => {
 };
 
 function App() {
-  merge([[2, 5, 7, 8], [1,5,5,336]]);
   return (
     <div className="App">
       <header className="App-header">
